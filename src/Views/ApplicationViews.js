@@ -12,9 +12,9 @@ export const ApplicationViews = () => {
 					<Outlet />
 				</>
 			}>
-				<Route path="nurseries" element={ <LocationList /> } />
-                <Route path="distributors" element={ <LocationList /> } />
-                <Route path="retailers" element={ <LocationList /> } />
+				<Route path="nurseries" element={ <></>  } />
+                <Route path="distributors" element={ <></>  } />
+                <Route path="retailers" element={ <></>  } />
 
 
 				
