@@ -84,11 +84,12 @@ export const RetailerList = () => {
         []
     )
 
-    const PurchaseFlower = (id, retailerArg) => {
+    const PurchaseFlower = (id, retailerArg, price) => {
         const purchaseToSendToAPI = {
             customerId: thornUserObj.id,
             flowerId: id,
-            retailerId: retailerArg
+            retailerId: retailerArg,
+            retailerPrice: parseFloat(price.toFixed(2))
         }
         postPurchase(purchaseToSendToAPI)
         
@@ -147,15 +148,15 @@ export const RetailerList = () => {
 
 
                                 {uniqueFlowers.map(uniqueFlower => {
-
+                                    const flowerPrice = uniqueFlower.price + (uniqueFlower.price + ((uniqueFlower.price) * (matchedDistributor.markUp / 100))) + ((uniqueFlower.price + ((uniqueFlower.price) * (matchedDistributor.markUp / 100))) * (retailer.markUp / 100))
                                     return <>
                                         <li key={uniqueFlower.id} className="flowerListInDistributors">
                                             <div>
                                                 <div key="flower">{uniqueFlower.flower.color} {uniqueFlower.flower.name}</div>
                                                 <div key="currency" className="flower_cost">{Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
-                                                    .format(uniqueFlower.price + ((uniqueFlower.price + ((uniqueFlower.price) * (matchedDistributor.markUp / 100))) * (retailer.markUp / 100)), 1)}</div>
+                                    .format(flowerPrice)}</div>
                                             </div>
-                                            <button onClick={() => {PurchaseFlower(uniqueFlower.flower.id, retailer.id)}} className="purchaseButton">Purchase</button>
+                                            <button onClick={() => {PurchaseFlower(uniqueFlower.flower.id, retailer.id, flowerPrice)}} className="purchaseButton">Purchase</button>
                                         </li>
 
                                     </>

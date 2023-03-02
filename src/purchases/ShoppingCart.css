@@ -1,0 +1,21 @@
+.tableHeader {
+    width: 200px;
+    text-align: start;
+    background-color: brown;
+    color: white;
+}
+
+.purchasesTable {
+    border: 1px solid gray;
+    border-collapse: collapse;
+    padding: 10px;
+    margin-left: 20px;
+}
+#tableHead {
+    margin-bottom: 10px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid gray;
+}
