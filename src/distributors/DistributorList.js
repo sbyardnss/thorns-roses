@@ -1,4 +1,4 @@
-import { getAllDistributorNurseries, getAllDistributors, getAllFlowers, getAllNurseries, getAllNurseryFlowers } from "../ApiManager";
+import { getAllDistributorNurseries, getAllDistributors, getAllFlowers, getAllNurseries, getAllNurseryFlowers, getAllRetailers } from "../ApiManager";
 import { useEffect, useState } from "react"
 import "./Distributors.css"
 
@@ -8,6 +8,7 @@ export const DistributorList = () => {
     const [distributorNurseries, setDistributorNurseries] = useState([])
     const [distributors, setDistributors] = useState([])
     const [flowers, setFlowers] = useState([])
+    const [retailers, setRetailers] = useState([])
 
     useEffect(
         () => {
@@ -59,14 +60,23 @@ export const DistributorList = () => {
         []
     )
 
+    useEffect(
+        () => {
+            getAllRetailers()
+                .then((retailerArray) => {
+                    setRetailers(retailerArray)
+                })
+        },
+        []
+    )
+
     return (
         <article key="distributors" className="distributors">
             <h2 id="distributorListHeader">List of Distributors</h2>
             {
                 distributors.map(distributor => {
                     const matchedDistributorNurseries = distributorNurseries.filter(distributorNursery => distributorNursery.distributorId === distributor.id)
-                    // const matchedNurseries = nurseries.filter(nursery => nursery.id === )
-                    // console.log(matchedDistributorNurseries)
+                    const matchedRetailers = retailers.filter(retailer => distributor.id === retailer.distributorId)
 
                     let matchedFlowers = []
 
@@ -113,6 +123,22 @@ export const DistributorList = () => {
 
                                 })}
 
+
+                            </ul>
+                            <ul className="matchedRetailers">
+                                <h3>Retailers:</h3>
+
+                                {
+                                    matchedRetailers.map(match => {
+
+                                        return <>
+                                        <li key={match.id} className="distributorRetailers">
+                                            <div key="retailer">{match.name}</div>
+                                        </li>
+
+                                    </>
+                                    })
+                                }
 
                             </ul>
 
