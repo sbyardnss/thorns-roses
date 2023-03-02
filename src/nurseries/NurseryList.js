@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getAllNurseryFlowers, getAllDistributorNurseries, getAllNurseries } from "../ApiManager"
-
+import "./Nursery.css"
 
 export const NurseryList = () => {
     const [nurseries, setNurseries] = useState([])
@@ -40,7 +40,7 @@ export const NurseryList = () => {
     )
 
     return <article className="nurseries">
-        <h2>List of Nurseries</h2>
+        <h2 id="nurseryListHeader">List of Nurseries</h2>
         {
             nurseries.map(nursery => {
                 const matchedFlowers = nurseryFlowers.filter(nurseryFlower => nurseryFlower.nurseryId === nursery.id)
@@ -48,7 +48,8 @@ export const NurseryList = () => {
                 return (
                     <div className="nursery" key={nursery.id}>
                         Name: {nursery.name}
-                        <ul className="flowerList">Flowers:
+                        <ul className="flowerList">
+                            <h3>Flowers:</h3>
                             {matchedFlowers.map(matchedFlower => {
                                 return (
                                     <li key={matchedFlower?.flower?.id} className="flower">
@@ -58,7 +59,8 @@ export const NurseryList = () => {
                                 )
                             })}
                         </ul>
-                        <ul className="distributorList">Distributors:
+                        <ul className="distributorList">
+                            <h3>Distributors:</h3>
                             {matchedDistributorNurseries.map(distributorNursery => {
                                 return (
                                     <li key={distributorNursery?.distributor?.id} className="distributor">{distributorNursery?.distributor?.name}</li>

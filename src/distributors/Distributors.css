@@ -1,0 +1,18 @@
+.distributors {
+    margin: 30px;
+}
+
+.flower_cost {
+    margin: 10px 0 0  0
+}
+
+.flowerListInDistributors {
+    background-color: rgb(19, 41, 41);
+    display: flex;
+    flex-direction: column;
+    color: whitesmoke;
+    border: 2px solid skyblue;
+    border-radius: 4px;
+    margin: 2px;
+    padding: 6px 0 6px 20px;
+}
