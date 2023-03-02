@@ -29,3 +29,20 @@ export const getAllRetailers = () => {
     return fetch(`http://localhost:8088/retailers`)
         .then(res => res.json())
 }
+
+export const getAllPurchases = () => {
+    return fetch(`http://localhost:8088/purchases`)
+        .then(res => res.json())
+}
+
+export const postPurchase = (purchaseObj) => {
+    return fetch(`http://localhost:8088/purchases`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(purchaseObj)
+    })
+        .then(res => res.json())
+        .then(getAllPurchases)
+}

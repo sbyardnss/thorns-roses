@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import "./Navbar.css"
 
 export const NavBar = () => {
@@ -15,12 +15,12 @@ export const NavBar = () => {
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/retailers">Retailers</Link>
             </li>
-            {/* <li className="navbar__item navbar__logout">
+            <li className="navbar__item navbar__logout">
                 <Link className="navbar__link" to="" onClick={() => {
-                    localStorage.removeItem("kandy_user")
-                    navigate("/", {replace: true})
+                    localStorage.removeItem("thorn_user")
+                    Navigate("/", {replace: true})
                 }}>Logout</Link>
-            </li> */}
+            </li>
         </ul>
     )
 }
