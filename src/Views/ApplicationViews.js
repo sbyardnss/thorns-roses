@@ -3,6 +3,7 @@ import { NurseryList } from "../nurseries/NurseryList"
 import "../App.css"
 import { DistributorList } from "../distributors/DistributorList"
 import { RetailerList } from "../retailers/RetailerList"
+import { ShoppingCart } from "../purchases/ShoppingCart"
 
 export const ApplicationViews = () => {
 	return (
@@ -20,6 +21,7 @@ export const ApplicationViews = () => {
 				<Route path="nurseries" element={< NurseryList />} />
 				<Route path="distributors" element={<DistributorList/>} />
 				<Route path="retailers" element={<RetailerList/>} />
+				<Route path="shoppingCart" element={<ShoppingCart/>} />
 
 
 
