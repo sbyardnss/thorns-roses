@@ -1,7 +1,11 @@
 .navbar {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: left;
+    justify-content: center;
+    align-items: center;
+    background-color: whitesmoke;
+    height: 60px;
+    
     
 }
 
