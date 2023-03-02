@@ -27,19 +27,27 @@
 
 
 import { Route, Routes } from "react-router-dom"
+import { Login } from "./auth/login"
+import { Register } from "./auth/register"
 import { NavBar } from "./Nav/Navbar"
 import { ApplicationViews } from "./Views/ApplicationViews"
+import { Authorized } from "./Views/Authorized"
 
 
 
 export const App = () => {
 	return <Routes>
+		<Route path="/login" element={<Login />} />
+		<Route path="/register" element={<Register />} />
+
 		<Route path="*" element={
-				<>
+			<>
+				<Authorized >
 					<NavBar />
 					<ApplicationViews />
-				</>
-			
+				</Authorized>
+			</>
+
 		} />
 	</Routes>
 }
