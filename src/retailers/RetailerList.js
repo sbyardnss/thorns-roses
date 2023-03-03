@@ -168,7 +168,7 @@ export const RetailerList = () => {
 
                                 })}
 
-
+ 
                             </ul>
                             <div className="matchedDistributors">Distributor: {matchedDistributor.name}</div>
                             <div className="matchedNurseries">Nurseries:</div>
