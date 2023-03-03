@@ -1,4 +1,5 @@
-
+const localThornUser = localStorage.getItem("thorn_user")
+const thornUserObj = JSON.parse(localThornUser)
 
 export const getAllNurseries = () => {
     return fetch(`http://localhost:8088/nurseries`)
@@ -35,14 +36,19 @@ export const getAllPurchases = () => {
         .then(res => res.json())
 }
 
-export const postPurchase = (purchaseObj) => {
-    return fetch(`http://localhost:8088/purchases`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(purchaseObj)
-    })
-        .then(res => res.json())
-        .then(getAllPurchases)
+export const getAllPurchasesSpecificCustomer = () => {
+    return fetch(`http://localhost:8088/purchases?_expand=flower&customerId=${thornUserObj.id}`)
+        .then(response => response.json())      
 }
+
+// export const postPurchase = (purchaseObj) => {
+//     return fetch(`http://localhost:8088/purchases`, {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify(purchaseObj)
+//     })
+//         .then(res => res.json())
+//         .then(getAllPurchases)
+// }

@@ -2,3 +2,29 @@
     width: 80px;
     margin: 8px 0;
 }
+
+
+.retailer {
+    margin: 20px;
+}
+
+#retailerListHeader {
+    margin: 20px;
+}
+
+#retailerName{
+    font-weight: bold;
+}
+
+.flowerListInRetailers {
+    background-color: rgb(19, 41, 41);
+    display: flex;
+    flex-direction: column;
+    
+    color: whitesmoke;
+    border: 2px solid skyblue;
+    border-radius: 4px;
+    margin: 2px;
+    padding: 6px 0 6px 20px;
+    width: 90%;
+}

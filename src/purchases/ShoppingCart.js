@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import "./ShoppingCart.css" 
+import "./ShoppingCart.css"
 
 
 export const ShoppingCart = () => {
@@ -19,7 +19,7 @@ export const ShoppingCart = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/purchases?_expand=flower&userId=${thornUserObj.id}`)
+            fetch(`http://localhost:8088/purchases?_expand=flower&customerId=${thornUserObj.id}`)
                 .then(response => response.json())
                 .then((purchasesArr) => {
                     setPurchases(purchasesArr)
@@ -77,21 +77,31 @@ export const ShoppingCart = () => {
         <h2>List of Purchases</h2>
 
 
-        <table class="purchasesTable">
-            <tr id="tableHead">
-                <th class="flowerTableHead">Flower</th>
-                <th class="quantityTableHead">Quantity</th>
-                <th class="totalCostTableHead">Total Cost</th>
-            </tr>
+        <table className="purchasesTable">
+            <tbody>
+                <tr id="tableHead">
+                    <th className="flowerTableHead">Flower</th>
+                    <th className="quantityTableHead">Quantity</th>
+                    <th className="totalCostTableHead">Total Cost</th>
+                </tr>
+
+            </tbody>
             {
                 quantifiedPurchases.map(
                     (purchase) => {
                         return (
-                            <tr>
-                                <td class="purchasedFlower">{purchase.name}</td>
-                                <td>{purchase.quantity}</td>
-                                <td> {purchase.totalCost}</td>
-                            </tr>
+                            <tbody key={purchase.id}>
+                                <tr>
+                                    <td className="purchasedFlower">{purchase.name}</td>
+                                    <td>{purchase.quantity}</td>
+                                    <td> {Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+                                    .format(parseFloat(purchase.totalCost))}</td>
+
+                                </tr>
+
+
+
+                            </tbody>
 
                         )
 

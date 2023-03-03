@@ -32,7 +32,7 @@ import { Register } from "./auth/register"
 import { NavBar } from "./Nav/Navbar"
 import { ApplicationViews } from "./Views/ApplicationViews"
 import { Authorized } from "./Views/Authorized"
-
+import { ShoppingCartProvider } from "./Nav/NavbarContext"
 
 
 export const App = () => {
@@ -43,8 +43,10 @@ export const App = () => {
 		<Route path="*" element={
 			<>
 				<Authorized >
-					<NavBar />
-					<ApplicationViews />
+					<ShoppingCartProvider>
+						<NavBar />
+						<ApplicationViews />
+					</ShoppingCartProvider>
 				</Authorized>
 			</>
 
