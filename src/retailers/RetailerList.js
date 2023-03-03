@@ -157,7 +157,7 @@ export const RetailerList = () => {
                                                     customerId: thornUserObj.id,
                                                     flowerId: uniqueFlower.flower.id,
                                                     retailerId: retailer.id,
-                                                    retailerPrice: parseFloat(uniqueFlower.price.toFixed(2))
+                                                    retailerPrice: parseFloat(flowerPrice.toFixed(2))
                                                 }
                                                 postPurchase(purchaseToSendToAPI)
 
@@ -168,7 +168,7 @@ export const RetailerList = () => {
 
                                 })}
 
-
+ 
                             </ul>
                             <div className="matchedDistributors">Distributor: {matchedDistributor.name}</div>
                             <div className="matchedNurseries">Nurseries:</div>
