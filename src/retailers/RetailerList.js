@@ -1,6 +1,8 @@
-import { getAllDistributorNurseries, getAllDistributors, getAllFlowers, getAllNurseries, getAllNurseryFlowers, getAllRetailers, getAllPurchases, postPurchase } from "../ApiManager";
-import { useEffect, useState } from "react"
+import { getAllDistributorNurseries, getAllDistributors, getAllFlowers, getAllNurseries, getAllNurseryFlowers, getAllRetailers, getAllPurchases, postPurchase, getAllPurchasesSpecificCustomer } from "../ApiManager";
+import { useContext, useEffect, useState } from "react"
 import "./retailers.css"
+import { ApplicationViewContext } from "../Views/ApplicationViews";
+import { ShoppingCartContext } from "../Nav/NavbarContext";
 export const RetailerList = () => {
     const [retailers, setRetailers] = useState([])
     const [nurseries, setNurseries] = useState([])
@@ -8,22 +10,16 @@ export const RetailerList = () => {
     const [distributorNurseries, setDistributorNurseries] = useState([])
     const [distributors, setDistributors] = useState([])
     const [flowers, setFlowers] = useState([])
-    const [purchases, setPurchases] = useState([])
-    const [purchase, updatePurchase] = useState({})
+   
+
+    const { postPurchase } = useContext(ShoppingCartContext)
+
 
     const localThornUser = localStorage.getItem("thorn_user")
     const thornUserObj = JSON.parse(localThornUser)
 
 
-    useEffect(
-        () => {
-            getAllPurchases()
-                .then((purchaseArray) => {
-                    setPurchases(purchaseArray)
-                })
-        },
-        []
-    )
+    
     useEffect(
         () => {
             getAllNurseries()
@@ -84,16 +80,16 @@ export const RetailerList = () => {
         []
     )
 
-    const PurchaseFlower = (id, retailerArg, price) => {
-        const purchaseToSendToAPI = {
-            customerId: thornUserObj.id,
-            flowerId: id,
-            retailerId: retailerArg,
-            retailerPrice: parseFloat(price.toFixed(2))
-        }
-        postPurchase(purchaseToSendToAPI)
+    // const PurchaseFlower = (id, retailerArg, price) => {
+    //     const purchaseToSendToAPI = {
+    //         customerId: thornUserObj.id,
+    //         flowerId: id,
+    //         retailerId: retailerArg,
+    //         retailerPrice: parseFloat(price.toFixed(2))
+    //     }
+    //     // postPurchase(purchaseToSendToAPI)
         
-    }
+    // }
 
 
 
@@ -112,7 +108,7 @@ export const RetailerList = () => {
                         })
                     }
 
-                    console.log(matchedNurseries)
+                    // console.log(matchedNurseries)
 
                     let matchedFlowers = []
 
@@ -141,7 +137,7 @@ export const RetailerList = () => {
 
                     return (
                         <div className="retailer" key={retailer.id}>
-                            <div>Name: {retailer.name}</div>
+                            <div id="retailerName">Name: {retailer.name}</div>
                             <div>Address: {retailer.address}</div>
                             <ul className="matchedNurseries">
                                 <h3>Flowers:</h3>
@@ -150,13 +146,22 @@ export const RetailerList = () => {
                                 {uniqueFlowers.map(uniqueFlower => {
                                     const flowerPrice = uniqueFlower.price + (uniqueFlower.price + ((uniqueFlower.price) * (matchedDistributor.markUp / 100))) + ((uniqueFlower.price + ((uniqueFlower.price) * (matchedDistributor.markUp / 100))) * (retailer.markUp / 100))
                                     return <>
-                                        <li key={uniqueFlower.id} className="flowerListInDistributors">
+                                        <li key={uniqueFlower.id} className="flowerListInRetailers">
                                             <div>
                                                 <div key="flower">{uniqueFlower.flower.color} {uniqueFlower.flower.name}</div>
                                                 <div key="currency" className="flower_cost">{Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
                                     .format(flowerPrice)}</div>
                                             </div>
-                                            <button onClick={() => {PurchaseFlower(uniqueFlower.flower.id, retailer.id, flowerPrice)}} className="purchaseButton">Purchase</button>
+                                            <button onClick={() => {
+                                                const purchaseToSendToAPI = {
+                                                    customerId: thornUserObj.id,
+                                                    flowerId: uniqueFlower.flower.id,
+                                                    retailerId: retailer.id,
+                                                    retailerPrice: parseFloat(uniqueFlower.price.toFixed(2))
+                                                }
+                                                postPurchase(purchaseToSendToAPI)
+
+                                            }} className="purchaseButton">Purchase</button>
                                         </li>
 
                                     </>
